@@ -1,5 +1,6 @@
 import pytest
 from fastapi.testclient import TestClient
+from starlette.websockets import WebSocketDisconnect
 
 from Task3.app.main import app, manager
 
@@ -12,6 +13,14 @@ def clear_rooms():
 @pytest.fixture
 def client():
     return TestClient(app)
+
+
+def test_connect_without_username(client):
+    with pytest.raises(WebSocketDisconnect) as error:
+        with client.websocket_connect("/ws/rooms/python"):
+            pass
+
+    assert error.value.code == 1008
 
 
 def test_connect_to_room(client):
