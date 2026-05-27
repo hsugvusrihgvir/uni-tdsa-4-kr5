@@ -28,26 +28,7 @@ docker compose up --build
 ## Проверка API
 
 ```powershell
-curl http://localhost:8000/tasks -H "X-User-Id: 10"
-```
-
-Ожидаемый ответ:
-
-```json
-[]
-```
-
-```powershell
 curl http://localhost:8000/health
-```
-
-Ожидаемый ответ:
-
-```json
-{
-  "status": "ok",
-  "env": "docker"
-}
 ```
 
 ![Проверка API](docs/health.png)
